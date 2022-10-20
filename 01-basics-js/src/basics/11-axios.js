@@ -10,6 +10,16 @@ const giphyApi = axios.create({
   }
 });
 
+export default giphyApi
+
+//Podemos exportar directamente y destructurar en el import también
+// export const giphyApi = axios.create({
+//   baseURL: "https://api.giphy.com/v1/gifs",
+//   params: {
+//     api_key: apiKey,
+//   },
+// });
+
 
 // giphyApi.get('/random')
 // .then( resp => {
