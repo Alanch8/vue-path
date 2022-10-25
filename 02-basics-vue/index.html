@@ -9,7 +9,7 @@
     <div id="myApp">
       <h1>Batman Quotes <small> {{ newQuote }} </small> </h1>
       
-      <input type="text" v-model="newQuote" v-on:keypress="addQuote" />
+      <input type="text" v-model="newQuote" v-on:keypress.enter="addQuote" />
 
       <hr />
 
