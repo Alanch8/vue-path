@@ -7,11 +7,13 @@
   <body>
     <!-- Vue controla absolutamente el siguiente div -->
     <div id="myApp">
-      <h1>Batman Quotes</h1>
+      <h3>{{ quote }}</h3>
+      <blockquote> - {{ author }}</blockquote>
 
-      <ul>
-        <li v-for="quote in quotes">author</li>
-      </ul>
+      <button v-on:click="changeQuote">
+        Change quote
+      </button>
+
     </div>
 
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
