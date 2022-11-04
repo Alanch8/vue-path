@@ -4,7 +4,7 @@
   <div class="indecision-container">
     <input type="text" v-model="question" placeholder="Ask me a question!" />
     <p>Remember to end with a question mark (?)</p>
-    <div>
+    <div v-if="isValidQuestion">
       <h2>{{ question }}</h2>
       <h1>{{ answer }}</h1>
     </div>
@@ -18,6 +18,7 @@ export default {
       question: null,
       answer: null,
       img: null,
+      isValidQuestion: false,
     };
   },
   methods: {
@@ -32,7 +33,10 @@ export default {
   },
   watch: {
     question(value, oldValue) {
+      this.isValidQuestion = false;
       if (!value.includes("?")) return;
+
+      this.isValidQuestion = true;
 
       //TODO
       this.getAnswer();
