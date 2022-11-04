@@ -27,7 +27,7 @@ export default {
       const { answer, image } = await fetch("https://yesno.wtf/api").then((r) =>
         r.json()
       );
-      this.answer = answer;
+      this.answer = answer === "yes" ? "Yes!" : "No!";
       this.img = image;
     },
   },
