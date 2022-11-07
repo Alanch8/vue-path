@@ -8,6 +8,10 @@ There are also Javascript basics.
 
 <img align="center" src="./01-basics-js/assets/img/async-await.png" alt="async-await" />
 
+<br/>
+
+<img align="center" src="./03-fundamentos/src/assets/indecisionApp.png" alt="indecisionApp" />
+
 <p align="right"><a href="#top">🔝</a></p>
 
 <p align="center">Made with ❤️ and ☕️ by Aitor Lancharro</p>
