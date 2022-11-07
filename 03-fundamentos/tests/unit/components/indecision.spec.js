@@ -12,4 +12,21 @@ describe('Indecision component', () => {
     test('debe de hacer match con el snapshot', () => {
         expect( wrapper.html() ).toMatchSnapshot()
     })
+
+    test('escribir en el input no debe de disparar nada (console.log)', () => {
+
+    })
+
+    test('escribir el simbolo de "?" debe de disparar el fetch', () => {
+
+    })
+
+    test('pruebas en el getAnswer', () => {
+
+    })
+
+    test('pruebas en getAnswer - Fallo en el API', () => {
+
+    })
+
 })
