@@ -58,12 +58,19 @@ describe('Indecision component', () => {
         const img = wrapper.find('img')
 
         expect( img.exists() ).toBeTruthy()
-        expect(wrapper.vm.img).toBe("https://yesno.wtf/assets/yes/2.gif");
+        expect(wrapper.vm.img).toBe('https://yesno.wtf/assets/yes/2.gif');
         expect(wrapper.vm.answer).toBe('yes!');
 
     })
 
     test('pruebas en getAnswer - Fallo en el API', () => {
+
+        fetch.mockImplementationOnce( () => Promise.reject('Api is down') )
+
+        const img = wrapper.find( )
+
+        expect( img.exists() ).toBeFalsy()
+        expect( wrapper.vm.answer ).toBe('No se pudo cargar del API')
 
     })
 
