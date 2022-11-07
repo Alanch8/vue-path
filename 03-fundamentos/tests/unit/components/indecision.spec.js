@@ -6,7 +6,13 @@ describe('Indecision component', () => {
     let wrapper;
     let clgSpy;
     
-    global.fetch = jest.fn()
+    global.fetch = jest.fn( () => Promise.resolve({
+        json: () => Promise.resolve({
+            answer: 'yes',
+            forced: false,
+            image: 'https://yesno.wtf/assets/yes/2.gif'
+        })
+    }) )
 
     beforeEach( () => {
         wrapper = shallowMount( Indecision )
@@ -45,7 +51,15 @@ describe('Indecision component', () => {
         expect( getAnswerSpy ).toHaveBeenCalled()
     })
 
-    test('pruebas en el getAnswer', () => {
+    test('pruebas en el getAnswer', async() => {
+        
+        await wrapper.vm.getAnswer()
+        
+        const img = wrapper.find('img')
+
+        expect( img.exists() ).toBeTruthy()
+        expect(wrapper.vm.img).toBe("https://yesno.wtf/assets/yes/2.gif");
+        expect(wrapper.vm.answer).toBe('yes!');
 
     })
 
