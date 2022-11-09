@@ -63,9 +63,11 @@ describe('Indecision component', () => {
 
     })
 
-    test('pruebas en getAnswer - Fallo en el API', () => {
+    test('pruebas en getAnswer - Fallo en el API', async() => {
 
         fetch.mockImplementationOnce( () => Promise.reject('Api is down') )
+
+        await wrapper.vm.getAnswer()
 
         const img = wrapper.find( )
 
