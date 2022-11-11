@@ -3,7 +3,7 @@
   <div v-else>
     <h1>Who's that Pokémon?</h1>
     <PokemonPicture :pokemonId="pokemon.id" :showPokemon="showPokemon" />
-    <PokemonOptions :pokemons="pokemonArr" />
+    <PokemonOptions :pokemons="pokemonArr" @selection="checkAnswer" />
   </div>
 </template>
 
@@ -12,8 +12,6 @@ import PokemonPicture from "@/components/PokemonPicture.vue";
 import PokemonOptions from "@/components/PokemonOptions.vue";
 
 import getPokemonOptions from "@/helpers/getPokemonOptions";
-
-// console.log( getPokemonOptions() );
 
 export default {
   components: {
@@ -33,6 +31,9 @@ export default {
 
       const rndInt = Math.floor(Math.random() * 4);
       this.pokemon = this.pokemonArr[rndInt];
+    },
+    checkAnswer(pokemonId) {
+      this.showPokemon = true;
     },
   },
   mounted() {
