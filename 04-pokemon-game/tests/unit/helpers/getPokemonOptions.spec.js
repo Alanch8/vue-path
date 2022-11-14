@@ -9,9 +9,9 @@ describe('getPokemonOptions helpers', () => {
         // console.log(pokemons);
 
         expect(pokemons.lenght).toBe(650)
-        expect(pokemons.[0]).toBe(1);
-        expect(pokemons.[500]).toBe(501);
-        expect(pokemons.[649).toBe(650);
+        expect(pokemons[0]).toBe(1);
+        expect(pokemons[500]).toBe(501);
+        expect(pokemons[649]).toBe(650);
 
     })
 
