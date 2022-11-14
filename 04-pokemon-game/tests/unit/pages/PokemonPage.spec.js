@@ -29,13 +29,15 @@ describe("PokemonPage component", () => {
             data() {
                 return {
                   pokemonArr: pokemons,
-                  pokemon: null,
+                  pokemon: pokemons[0],
                   showPokemon: false,
                   showAnswer: false,
                   message: "",
                 };
             }
         })
+
+        expect( wrapper.html() ).toMatchSnapshot()
         
     })
     
