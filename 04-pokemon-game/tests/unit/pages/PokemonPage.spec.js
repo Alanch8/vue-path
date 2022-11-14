@@ -85,6 +85,11 @@ describe("PokemonPage component", () => {
 
         expect(wrapper.find('h2').exists()).toBeTruthy()
         expect(wrapper.vm.showPokemon).toBe(true)
+        expect(wrapper.find("h2").text()).toBe(`Correct, ${pokemons[0].name}`);
+
+        await wrapper.vm.checkAnswer(10);
+
+        expect(wrapper.vm.message).toBe(`Oops, was ${pokemons[0].name}`);
 
     })
     
