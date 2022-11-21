@@ -3,7 +3,7 @@ import getRandomInt from "../../helpers/getRandomInt";
 const counterStore = {
   // TODO: Falta algo
   namespaced: true,
-  
+
   state: () => ({
     //similar a data()
     count: 1,
@@ -35,7 +35,7 @@ const counterStore = {
       commit("setLoading", true);
       const randomInt = await getRandomInt();
 
-      // context.commit('incrementBy', randomInt) // desestructuamos context para sacar commit y que nos quede más limpio
+      // context.commit('incrementBy', randomInt) // desestructuramos context para sacar commit y que nos quede más limpio
       commit("incrementBy", randomInt);
       commit("setLoading", false);
     },
