@@ -1,10 +1,13 @@
 import { createStore } from "vuex";
+import getRandomInt from '../helpers/getRandomInt'
 
 
 export default createStore({
     state: { //similar a data()
         count: 1,
-        lastMutation: 'none'
+        lastMutation: 'none',
+        isLoading: false,
+        lastRandomInt: 0
     },
 
     mutations: { //similar a methods(). Tienen que ser sincronas y son las que se encargan de cambiar el State. Prohibido hacer async await.
@@ -14,7 +17,18 @@ export default createStore({
         },
         incrementBy( state, val ) {
             state.count += val
-            state.lastMutation = 'incrementBy'
+            state.lastMutation = 'incrementBy: ' + val
+            state.lastRandomInt = val
+        }
+    },
+
+    actions: { // son metodos que pueden ser asincronos (por asi decirlo)
+        async incrementRandomInt( context ) {
+            const randomInt = await getRandomInt()
+
+            context.commit('incrementBy', randomInt)
         }
     }
 })
+
+// dispah actions y commit mutations.
