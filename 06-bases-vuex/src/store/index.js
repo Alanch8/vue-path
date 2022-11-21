@@ -19,14 +19,21 @@ export default createStore({
             state.count += val
             state.lastMutation = 'incrementBy: ' + val
             state.lastRandomInt = val
+        },
+        setLoading( state, val ) {
+            state.isLoading = val
+            state.lastMutation = 'setLoading: ' + val
         }
     },
 
     actions: { // son metodos que pueden ser asincronos (por asi decirlo)
-        async incrementRandomInt( context ) {
-            const randomInt = await getRandomInt()
-
-            context.commit('incrementBy', randomInt)
+        async incrementRandomInt( { commit } ) {
+          commit("setLoading", true);
+          const randomInt = await getRandomInt();
+          
+          // context.commit('incrementBy', randomInt) // desestructuamos context para sacar commit y que nos quede más limpio
+          commit("incrementBy", randomInt);
+          commit("setLoading", false);
         }
     }
 })
