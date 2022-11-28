@@ -1,5 +1,5 @@
 
 
-// export const myGetter = async ({ state }) => {
+// export const myGetter = ( state ) => {
     // return state
 // }

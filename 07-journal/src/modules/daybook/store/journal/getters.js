@@ -1,11 +1,14 @@
 
 
-// export const myGetter = async ({ state }) => {
+// export const myGetter = ( state ) => {
     // return state
 // }
 
-export const getEntriesByTerm = async (/*{ state }*/) => {
+export const getEntriesByTerm = ( state ) => (term = '') => {
 
+    if ( term.length === 0 ) return state.entries
+
+    return state.entries.filter( entry => entry.text.toLowerCase().includes( term.toLocaleLowerCase() ) )
 }
 
-export const getEntryById = async (/*{ state }*/) => {};
+export const getEntryById = (/* state */) => {};
