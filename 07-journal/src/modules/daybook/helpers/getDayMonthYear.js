@@ -4,7 +4,7 @@ const days   = ['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sáb
 const getDayMonthYear = ( dateString ) => {
     
     const date = new Date( dateString )
-    console.log(date);
+    // console.log(date);
 
     return {
         day: date.getDate(),
