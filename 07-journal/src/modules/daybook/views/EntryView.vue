@@ -37,6 +37,7 @@
 
     <Fab
         icon="fa-save"
+        @on:click="saveEntry"
     />
 
 
@@ -72,6 +73,9 @@ export default {
             if ( !entry ) return this.$router.push({ name: 'no-entry' })
 
             this.entry = entry
+        },
+        async saveEntry() {
+            console.log('Guardando entrada');
         }
     },
 
