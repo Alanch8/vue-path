@@ -70,16 +70,32 @@ export default {
     methods: {
         ...mapActions('journal', ['updateEntry']),
         loadEntry() {
-            const entry = this.getEntryById( this.id ) // no confundir con entry de data(). Este de aqui es el que leo.
-            if ( !entry ) return this.$router.push({ name: 'no-entry' })
+
+            let entry;
+
+            if ( this.id === 'new' ) {
+                entry = {
+                    text: '',
+                    date: new Date().getTime()
+                }
+            } else {
+                entry = this.getEntryById( this.id ) // no confundir con entry de data(). Este de aqui es el que leo.
+                if ( !entry ) return this.$router.push({ name: 'no-entry' })
+            }
 
             this.entry = entry
         },
         async saveEntry() {
-            console.log('Guardando entrada');
+            
+            if ( this.entry.id ) {
+                // Actualizar
+                await this.updateEntry( this.entry )
+            } else {
+                // Crear una nueva entrada
+                console.log('Post de una nueva entrada');
+            }
 
-            // Action del Journal Module
-            this.updateEntry( this.entry )
+            
         }
     },
 
