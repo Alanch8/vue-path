@@ -24,6 +24,8 @@
                 :entry='entry'
             />
         </div>
+
+        // I have to make several modifications here in order to "create a new entry".
     </div>
 </template>
 
