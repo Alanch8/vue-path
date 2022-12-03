@@ -20,4 +20,9 @@ export const updateEntry = ( state, entry ) => { // entry actualizada
 
 };
 
-export const addEntry = (/* state */) => {};
+export const addEntry = ( state, entry ) => {
+
+   state.entries = [ entry, ...state.entries ];
+
+    // state -> entries -> la nueva entrada debe de ser la primera
+};
