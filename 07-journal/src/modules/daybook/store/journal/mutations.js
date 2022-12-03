@@ -26,3 +26,9 @@ export const addEntry = ( state, entry ) => {
 
     // state -> entries -> la nueva entrada debe de ser la primera
 };
+
+export const deleteEntry = ( state, id ) => {
+
+    // remover del state.entries borrar la entrada por ese ID
+    state.entries = state.entries.filter( entry => entry.id != id )
+}
