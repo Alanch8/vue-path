@@ -41,10 +41,11 @@
             </textarea>
         </div>
         
-        <!-- <img 
-            src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80" 
+        <img
+            v-if="entry.picture && !localImage" 
+            :src="entry.picture" 
             alt="entry picture"
-            class="img-thumbnail"> -->
+            class="img-thumbnail">
 
         <img 
             v-if="localImage"
@@ -68,6 +69,7 @@ import { mapGetters, mapActions } from 'vuex'
 import Swal from 'sweetalert2'
 
 import getDayMonthYear from '../helpers/getDayMonthYear'
+import uploadImage from '../helpers/uploadImage'
 
 export default {
     props: {
@@ -115,6 +117,10 @@ export default {
                 allowOutsideClick: false
             })
             Swal.showLoading()
+
+            const picture = await uploadImage( this.file )
+
+            this.entry.picture = picture
             
             if ( this.entry.id ) {
                 // Actualizar
@@ -131,6 +137,7 @@ export default {
                 // redirectTo => entry, params: id
             }  
             
+            this.file = null
             Swal.fire('Guardado', 'Entrada registrada con éxito', 'success')
         },
 
