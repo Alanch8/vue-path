@@ -8,6 +8,10 @@
             </div>
 
             <div>
+
+                <input type="file"
+                        @change="onSelectedImage">
+
                 <button
                     v-if="entry.id" 
                     class="btn btn-danger mx-2"
@@ -32,10 +36,17 @@
             </textarea>
         </div>
         
-        <img 
+        <!-- <img 
             src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80" 
             alt="entry picture"
+            class="img-thumbnail"> -->
+
+        <img 
+            v-if="localImage"
+            :src="localImage" 
+            alt="entry picture"
             class="img-thumbnail">
+
     </template>
 
     <Fab
@@ -67,7 +78,9 @@ export default {
 
     data() {
         return {
-            entry: null
+            entry: null,
+            localImage: null,
+            file: null
         }
     },
 
@@ -139,8 +152,28 @@ export default {
 
             // console.log('delete', this.entry );
 
+        },
+        onSelectedImage( event ) {
+
+            const file = event.target.files[0]
+            if ( !file ) {
+                this.localImage = null
+                this.file = null
+                return
+            } 
+
+            this.file = file
+
+            const fr = new FileReader()
+            fr.onload = () => this.localImage = fr.result
+            fr.readAsDataURL( file )
+
+        },
+        onSelectImage() {
+                        
         }
     },
+
 
     computed: {
         ...mapGetters('journal', ['getEntryById']),
