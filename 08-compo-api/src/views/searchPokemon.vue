@@ -3,8 +3,9 @@
   <form @submit.prevent="onSubmit">
     <input type="number" 
            placeholder="Número del pókemon"
-           autofocus
            v-model="pokemonId"
+           ref="txtSearchId"
+
     >
   </form>
   <br>
@@ -12,7 +13,7 @@
 </template>
 
 <script>
-import { ref } from "vue";
+import { ref, onActivated } from "vue";
 import { useRouter } from "vue-router";
 
 export default {
@@ -21,9 +22,16 @@ export default {
         const router = useRouter()
 
         const pokemonId = ref(1)
+        const txtSearchId = ref() //Creamos la variable txtSearchId (puede ser cualquier nombre), para poder hacer un autofocus o un select como es el caso. Si usaramos la propiedad autofocus directamente en el input el comportamiento es un poco raro debdido al keep alive del router.
+
+        onActivated(() => {
+          // txtSearchId.value.focus()
+          txtSearchId.value.select()
+        })
 
         return {
             pokemonId,
+            txtSearchId,
 
             onSubmit: () => {
                 // console.log('Pókemon a buscar: ', pokemonId.value )
