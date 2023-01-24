@@ -1,13 +1,27 @@
 <template>
   <div class="modal-background fade-in">
     <div class="modal-container">
-        <h1>Hola Mundo</h1>
+
+        <slot name="header" />
+        <slot name="body" />
+        <slot name="footer" />
+
+        <!-- <slot /> -->
+        <!-- <slot>
+            <div class="center">
+                Esto aparecerá si no tenemos contenido
+            </div>
+        </slot> -->
     </div>
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+    setup( props, context ) {
+
+    }
+};
 </script>
 
 <style scoped>
