@@ -7,14 +7,15 @@ export default createStore({
       { id: 2, text: "Piedra del alma", completed: true },
       { id: 3, text: "Piedra de poder", completed: true },
       { id: 4, text: "Piedra de realidad", completed: false },
-      {
-        id: 5,
-        text: "Conseguir nuevos secuaces competentes",
-        completed: false,
-      },
+      { id: 5, text: "Conseguir nuevos secuaces competentes", completed: false },
     ],
   },
-  mutations: {},
+  mutations: {
+    toggleTodo( state, id ) {
+      const todoIdx = state.todos.findIndex( todo => todo.id === id )
+      state.todos[todoIdx].completed = !state.todos[todoIdx].completed;
+    }
+  },
   actions: {},
   getters: {
     pendingTodos(state, getters, rootState) {
