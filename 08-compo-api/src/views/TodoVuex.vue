@@ -3,60 +3,85 @@
   <!-- <h4>Pendientes: {{ $store.state.todos.filter( t => !t.completed ).length }}</h4> -->
   <h4>Pendientes: {{ pending.length }}</h4>
 
-  <hr>
-  <button class="active">Todos</button>
-  <button>Pendientes</button>
-  <button>Completados</button>
+  <hr />
+  <button 
+    :class="{ active: currentTab === 'all' }"
+    @click="currentTab = 'all'"
+  >
+    Todos
+  </button>
+  
+  <button 
+    :class="{ active: currentTab === 'pending' }"
+    @click="currentTab = 'pending'"
+  >
+    Pendientes
+  </button>
+  
+  <button 
+    :class="{ active: currentTab === 'completed' }"
+    @click="currentTab = 'completed'"
+  >
+    Completados
+  </button>
+
 
   <div>
     <ul>
-      <li v-for="todo in all" :key="todo.id"
-        :class="{'completed': todo.completed }">
+      <li
+        v-for="todo in all"
+        :key="todo.id"
+        :class="{ completed: todo.completed }"
+      >
         {{ todo.text }}
       </li>
     </ul>
   </div>
-  
 </template>
 
 <script>
-import { computed } from 'vue'
-import { useStore } from 'vuex'
+import { computed, ref } from "vue";
+import { useStore } from "vuex";
 
 export default {
-  const store = useStore()
+  setup() {
+    const store = useStore();
 
-  return {
-    pending: computed(() => store.getters['pendingTodos']),
-    all: computed(() => store.getters['allTodos']),
-    completed: computed(() => store.getters['completedTodos']),
-  }
-  
-}
+    const currentTab = ref("all");
+
+    return {
+      currentTab,
+
+      pending: computed(() => store.getters["pendingTodos"]),
+      all: computed(() => store.getters["allTodos"]),
+      completed: computed(() => store.getters["completedTodos"]),
+    };
+  },
+};
 </script>
 
 <style scoped>
-  div { 
-    display: flex;
-    justify-content: center;
-    text-align: center;
-  }
+div {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
 
-  ul {
-    width: 300px;
-    text-align: left;
-  }
+ul {
+  width: 300px;
+  text-align: left;
+}
 
-  li {
-    cursor: pointer;
-  }
+li {
+  cursor: pointer;
+}
 
-  .active {
-    background-color: #2c3e50;
-    color: white;
-  }
+.active {
+  background-color: #2c3e50;
+  color: white;
+}
 
-  .completed{
-    text-decoration: line-through;
-  }
+.completed {
+  text-decoration: line-through;
+}
 </style>
