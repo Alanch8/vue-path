@@ -4,8 +4,8 @@ export default createStore({
   state: {
     todos: [
       { id: 1, text: "Recolectar las piedras del infinito", completed: false },
-      { id: 2, text: "Piedra del alma", completed: false },
-      { id: 3, text: "Piedra de poder", completed: false },
+      { id: 2, text: "Piedra del alma", completed: true },
+      { id: 3, text: "Piedra de poder", completed: true },
       { id: 4, text: "Piedra de realidad", completed: false },
       {
         id: 5,
@@ -14,11 +14,10 @@ export default createStore({
       },
     ],
   },
-  getters: {},
   mutations: {},
   actions: {},
   getters: {
-    pendingTools(state, getters, rootState) {
+    pendingTodos(state, getters, rootState) {
       return state.todos.filter((todo) => !todo.completed);
     },
     allTodos: (state, getters, rootState) => {
@@ -27,6 +26,18 @@ export default createStore({
     completedTodos: (state, getters, rootState) => {
       return state.todos.filter((todo) => todo.completed);
     },
+    getTodosByTab: ( _ , getters ) => ( tab ) => {
+
+      switch (tab) {
+        case "all":
+          return getters.allTodos;
+        case "pending":
+          return getters.pendingTodos;
+        case "completed":
+          return getters.completedTodos;
+      }
+
+    } //barra baja indica que no voy a usar el state pero podría llegar a hacerlo si quisiera. En vez de hacer un return, devuelvo una función.
   },
   modules: {},
 });
