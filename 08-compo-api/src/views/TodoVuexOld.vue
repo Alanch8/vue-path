@@ -4,23 +4,27 @@
   <h4>Pendientes: {{ pending.length }}</h4>
 
   <hr />
-  <button :class="{ active: currentTab === 'all' }" @click="currentTab = 'all'">
+  <button 
+    :class="{ active: currentTab === 'all' }"
+    @click="currentTab = 'all'"
+  >
     Todos
   </button>
-
-  <button
+  
+  <button 
     :class="{ active: currentTab === 'pending' }"
     @click="currentTab = 'pending'"
   >
     Pendientes
   </button>
-
-  <button
+  
+  <button 
     :class="{ active: currentTab === 'completed' }"
     @click="currentTab = 'completed'"
   >
     Completados
   </button>
+
 
   <div>
     <ul>
@@ -28,7 +32,7 @@
         v-for="todo in getTodosByTab"
         :key="todo.id"
         :class="{ completed: todo.completed }"
-        @dblclick="toggleTodo(todo.id)"
+        @dblclick="toggleTodo( todo.id )"
       >
         {{ todo.text }}
       </li>
@@ -37,17 +41,26 @@
 </template>
 
 <script>
-import useTodos from "@/composables/useTodos";
+import { computed, ref } from "vue";
+import { useStore } from "vuex";
 
 export default {
   setup() {
-    const { currentTab, getTodosByTab, pending, toggleTodo } =
-      useTodos();
+    const store = useStore();
+
+    const currentTab = ref("all");
+
     return {
       currentTab,
-      getTodosByTab,
-      pending,
-      toggleTodo,
+
+      all: computed(() => store.getters["allTodos"]),
+      completed: computed(() => store.getters["completedTodos"]),
+      pending: computed(() => store.getters["pendingTodos"]),
+
+      getTodosByTab: computed( () => store.getters['getTodosByTab'](currentTab.value)), //No hace falta que el nombre de la variable sea el mismo que el del getter.
+
+      // Methods
+      toggleTodo: ( id ) => store.commit('toggleTodo', id)
     };
   },
 };
