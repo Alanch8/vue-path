@@ -1,13 +1,15 @@
 <template>
   <h1>Aprendiendo Slots</h1>
-  <button>Abrir Modal</button>
+  <button @click="openModal">Abrir Modal</button>
 
-  <modal title="Hola mundo">
+  <modal  v-if="isOpen"
+          title="Hola mundo"
+          @on:close="closeModal">
     <!-- <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit!</p>
     <h2>Titulo del modal</h2>
     <button>Salir</button> -->
     <template v-slot:footer>
-      <button>Salir</button>
+      <button @click="closeModal">Salir</button>
     </template>
     <template v-slot:body>
       <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit!</p>
@@ -15,14 +17,29 @@
     <template v-slot:header>
       <h2>Titulo del modal</h2>
     </template>
+    <template v-slot:exposed='{ newTitle }'>
+      <h2>{{ newTitle }}</h2>
+    </template>
   </modal>
 </template>
 
 <script>
+import { ref } from "vue";
 import Modal from "../components/Modal.vue";
+
 export default {
   components: { Modal },
-  setup() {},
+  setup() {
+
+    const isOpen = ref(false)
+
+    return {
+      isOpen,
+
+      openModal: () => isOpen.value = true,
+      closeModal: () => isOpen.value = false
+    }
+  },
 };
 </script>
 
