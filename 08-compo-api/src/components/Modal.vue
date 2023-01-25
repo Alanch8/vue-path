@@ -26,7 +26,7 @@ export default {
     emits: ['on:close'],
     setup( props, context ) {
 
-      console.log({props, context});
+      // console.log({props, context});
 
       return {
         newTitle: props.title?.toUpperCase()
