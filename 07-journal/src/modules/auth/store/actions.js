@@ -9,14 +9,15 @@ export const createUser = async ({ commit }, user) => {
   const { name, email, password } = user;
 
   try {
-    const { data } = await authApi.post(":signUp", {
-      email,
-      password,
-      returnSecureToken: true,
-    });
+
+    const { data } = await authApi.post(":signUp", { email, password, returnSecureToken: true })
+    const { idToken, refreshToken } = data
+    
+    const resp = await authApi.post(':update', { displayName: name, idToken })
+    console.log(resp);
 
     return { ok: true };
   } catch (error) {
     return { ok: false, message: error.response.data.error.message };
   }
-};
+}; 
